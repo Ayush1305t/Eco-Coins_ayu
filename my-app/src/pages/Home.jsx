@@ -1,7 +1,9 @@
 import { Trophy, Camera } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
+  const navigate=useNavigate()
   return (
     <div className="bg-black text-white min-h-screen">
 
@@ -42,7 +44,8 @@ const Home = () => {
         {/* BUTTONS */}
         <div className="flex gap-4 mt-8">
 
-          <button className="bg-green-400 text-black px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+          <button className="bg-green-400 text-black px-6 py-3 rounded-xl font-semibold flex items-center gap-2" 
+          onClick={()=>{navigate("/validation")}}>
             Start Cleaning <Camera size={18} />
           </button>
 
