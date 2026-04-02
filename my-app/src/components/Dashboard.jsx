@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [coins] = useState(180);
@@ -7,6 +8,15 @@ const Dashboard = () => {
   const [todayCleanups] = useState(1);
   const maxCleanups = 2;
   const targetCoins = 200;
+  const navigate = useNavigate();
+
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Clean", path: "/clean" },
+    { label: "Leaderboard", path: "/" },
+    { label: "Rewards", path: "/" },
+  ];
 
   const activities = [
     { id: 1, location: "MG Road, Bangalore", time: "2 hours ago", coins: +10, type: "earn" },
@@ -25,9 +35,16 @@ const Dashboard = () => {
           <span style={{ color: "#4ade80" }}>Coin</span>
         </div>
         <div style={styles.navLinks}>
-          {["Home", "Dashboard", "Clean", "Leaderboard", "Rewards"].map((item) => (
-            <span key={item} style={{ ...styles.navItem, ...(item === "Dashboard" ? styles.navActive : {}) }}>
-              {item}
+          {navItems.map((item) => (
+            <span
+              key={item.label}
+              onClick={() => navigate(item.path)}
+              style={{
+                ...styles.navItem,
+                ...(item.label === "Dashboard" ? styles.navActive : {}),
+              }}
+            >
+              {item.label}
             </span>
           ))}
         </div>
@@ -68,7 +85,7 @@ const Dashboard = () => {
             <div style={{ fontSize: 32 }}>📷</div>
             <h2 style={{ margin: "8px 0 4px", fontSize: 22 }}>Start Cleaning</h2>
             <p style={{ margin: 0, opacity: 0.85 }}>{maxCleanups - todayCleanups} cleanup remaining today</p>
-            <button style={styles.arrowBtn}>→</button>
+            <button style={styles.arrowBtn} onClick={() => navigate("/clean")}>→</button>
           </div>
           <div style={styles.redeemCard}>
             <div style={{ fontSize: 28 }}>🎁</div>

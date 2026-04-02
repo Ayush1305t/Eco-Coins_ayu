@@ -1,20 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({
- 
-  apiKey: import.meta.env.VITE_GEMINI_API_KEY, //in your .env file kept outside the src file and store VITE_GEMINI_API_KEY="Your Api key"
- 
-});
+const getAI = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) throw new Error("API Key missing");
+  return new GoogleGenAI({ apiKey });
+};
 
-/**
- * Convert a dataUrl (base64) or Blob/File to base64 string.
- */
 const toBase64 = (source) => {
   if (typeof source === "string" && source.startsWith("data:")) {
-    // It's already a dataUrl — strip the prefix
     return { base64: source.split(",")[1], mimeType: source.split(";")[0].split(":")[1] };
   }
-  // It's a Blob/File
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(source);
@@ -29,15 +24,9 @@ const toBase64 = (source) => {
   });
 };
 
-/**
- * @param {string|Blob} beforeImage  - dataUrl string or Blob
- * @param {string|Blob} afterImage   - dataUrl string or Blob
- * @param {object} beforeMeta        - { date, time, location }
- * @param {object} afterMeta         - { date, time, location }
- * @returns {Promise<{verdict: string, confidence: string, details: string}>}
- */
 export const geminiService = async (beforeImage, afterImage, beforeMeta = {}, afterMeta = {}) => {
   try {
+    const ai = getAI();
     const before = await toBase64(beforeImage);
     const after = await toBase64(afterImage);
 
@@ -61,7 +50,7 @@ Analyse the two images carefully:
 Evaluate:
 1. Is the area visibly cleaner in the AFTER photo compared to BEFORE?
 2. Are both photos of the same or very similar location?
-3. Is there any sign of fraud (e.g., photos taken in different places, showing a clean area in BEFORE)?
+3. Is there any sign of fraud?
 
 Respond ONLY in the following JSON format (no markdown, no extra text):
 {
@@ -86,12 +75,9 @@ Respond ONLY in the following JSON format (no markdown, no extra text):
 
     const raw = response.candidates[0].content.parts[0].text.trim();
 
-    // Try to parse JSON
     try {
-      const parsed = JSON.parse(raw);
-      return parsed;
+      return JSON.parse(raw);
     } catch {
-      // Fallback: extract verdict from raw text
       const upper = raw.toUpperCase();
       if (upper.includes("NOT_CLEANED") || upper.includes("NOT CLEANED")) {
         return { verdict: "NOT_CLEANED", confidence: "LOW", details: raw };
