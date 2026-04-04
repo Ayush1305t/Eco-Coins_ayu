@@ -3,12 +3,12 @@ import ImageUploadBox from '../component/cleaningValidation/ImageUploadBox';
 import ImagePreview from '../component/cleaningValidation/ImagePreview';
 import ValidateButton from '../component/cleaningValidation/ValidationButton';
 import CompareResult from '../component/cleaningValidation/CompareResult'; 
-import useGeminiValidation from '../hooks/useGeminiValidation';
+import useGrokValidation from '../hooks/useGrokValidation';
 
 const CleaningValidationPage = () => {
     const [beforeImage,setBeforeImage]=useState(null);
     const [afterImage,setAfterImage]=useState(null);
-    const {loading,result,validate}=useGeminiValidation();
+    const {loading,result,validate}=useGrokValidation();
     const handleSubmit=async()=>{
         if(!beforeImage || !afterImage){
             alert("please upload both image");

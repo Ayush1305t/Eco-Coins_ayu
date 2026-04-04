@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Camera, CheckCircle, XCircle, AlertTriangle, MapPin, Clock, Loader2, RotateCcw, Trophy, ArrowRight, Leaf } from "lucide-react";
 import useCamera from "../hooks/useCamera";
-import { geminiService } from "../services/geminiService";
+import { grokService } from "../services/grokService";
 import { useNavigate } from "react-router-dom";
 
 // ─── Step indicator ───────────────────────────────────────────
@@ -197,7 +197,7 @@ const VerifyStep = ({ beforePhoto, afterPhoto, onDone }) => {
     setStatus("loading");
     setError(null);
     try {
-      const res = await geminiService(
+      const res = await grokService(
         beforePhoto.dataUrl,
         afterPhoto.dataUrl,
         beforePhoto.meta,
@@ -207,7 +207,7 @@ const VerifyStep = ({ beforePhoto, afterPhoto, onDone }) => {
       setStatus("done");
     } catch (e) {
       console.error(e);
-      setError("Gemini API error. Check your API key or try again.");
+      setError(e?.message || "Verification failed. Please try again.");
       setStatus("error");
     }
   };
@@ -230,7 +230,7 @@ const VerifyStep = ({ beforePhoto, afterPhoto, onDone }) => {
 
       <div className="text-center mb-10">
         <h1 className="text-4xl font-black mb-3 bg-gradient-to-r from-green-300 to-emerald-400 bg-clip-text text-transparent">🤖 AI Verification</h1>
-        <p className="text-gray-400 font-medium text-lg">Gemini AI is analyzing your photos...</p>
+        <p className="text-gray-400 font-medium text-lg">Grok is analyzing your photos...</p>
       </div>
 
       {/* Photo comparison */}
@@ -258,7 +258,7 @@ const VerifyStep = ({ beforePhoto, afterPhoto, onDone }) => {
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500/30 to-emerald-500/30 animate-pulse" />
             </div>
           </div>
-          <p className="text-gray-400 text-base font-medium">Analyzing with Gemini AI...</p>
+          <p className="text-gray-400 text-base font-medium">Analyzing with Grok...</p>
         </div>
       )}
 

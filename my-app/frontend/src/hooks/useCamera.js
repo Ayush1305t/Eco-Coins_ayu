@@ -116,7 +116,7 @@ const useCamera = () => {
       location: loc,
     };
 
-    // Convert dataUrl -> Blob for Gemini
+    // Convert dataUrl -> Blob for backend AI verification
     const res = await fetch(dataUrl);
     const blob = await res.blob();
 

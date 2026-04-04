@@ -88,7 +88,7 @@ const Clean = () => {
             <CheckCircle2 size={26} className="text-green-300 mt-0.5 shrink-0 relative z-10 group-hover:scale-125 transition-transform duration-300" />
             <div className="relative z-10 text-left">
               <p className="font-bold text-white text-base">AI Verification</p>
-              <p className="text-sm text-gray-400 mt-1">Gemini AI ensures authentic environmental improvement</p>
+              <p className="text-sm text-gray-400 mt-1">Grok helps verify authentic environmental improvement</p>
             </div>
           </div>
 

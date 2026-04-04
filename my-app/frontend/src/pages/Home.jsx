@@ -117,7 +117,7 @@ const Home = () => {
             <div className="group p-6 rounded-xl bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700/50 hover:border-green-500/40 backdrop-blur-md transition-all duration-300">
               <div className="text-5xl mb-4">🤖</div>
               <h3 className="font-bold text-lg mb-2 text-white">AI Verification</h3>
-              <p className="text-sm text-gray-400">Our Gemini AI analyzes images for genuine cleanup proof</p>
+              <p className="text-sm text-gray-400">Our Grok vision check analyzes images for genuine cleanup proof</p>
             </div>
             <div className="group p-6 rounded-xl bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700/50 hover:border-green-500/40 backdrop-blur-md transition-all duration-300">
               <div className="text-5xl mb-4">🎁</div>

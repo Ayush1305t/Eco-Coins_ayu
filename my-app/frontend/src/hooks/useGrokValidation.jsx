@@ -1,14 +1,14 @@
-import { useState } from "react"; 
-import { geminiService } from "../services/geminiService";
+import { useState } from "react";
+import { grokService } from "../services/grokService";
 
-const useGeminiValidation = () => {
+const useGrokValidation = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
 
   const validate = async (beforeImage, afterImage) => {
     setLoading(true);
     try {
-      const res = await geminiService(beforeImage,afterImage);
+      const res = await grokService(beforeImage, afterImage);
       setResult(res);
     } catch (err) {
       console.error(err);
@@ -20,4 +20,4 @@ const useGeminiValidation = () => {
   return { loading, result, validate };
 };
 
-export default useGeminiValidation;
+export default useGrokValidation;
