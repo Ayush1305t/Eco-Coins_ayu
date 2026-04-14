@@ -1,3 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-slate-800 transition-colors duration-500 min-h-screen;
+    background: radial-gradient(circle at top right, #fce7f3 0%, transparent 50%),
+                radial-gradient(circle at bottom left, #e0f2fe 0%, transparent 50%),
+                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background-attachment: fixed;
+  }
+  
+  .dark body {
+    @apply text-slate-100;
+    background: radial-gradient(circle at top right, rgba(244, 114, 182, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1) 0%, transparent 55%),
+                linear-gradient(135deg, #090e17 0%, #0f172a 50%, #111827 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/20 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  .dark .glass {
+    @apply bg-black/30 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 135, 0.5);
+  }
+  
+  .dark .text-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 135, 0.8);
+  }
+}
