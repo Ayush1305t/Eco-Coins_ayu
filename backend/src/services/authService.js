@@ -48,6 +48,7 @@ const registerUser = (body = {}) => {
     name,
     email,
     password,
+    isVerified: true,
   });
 };
 
